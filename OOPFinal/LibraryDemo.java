@@ -1,44 +1,35 @@
 
-abstract class Draw {
-    abstract double calculateVolume();
-    abstract double calculateArea();
-    abstract double calculatePerimeter();
+interface LibraryItem {
+    String getTitle();
+    String getAuthor();
+    int getYear();
+    boolean isAvailable();
 }
 
-class Cube extends Draw {
-    double side;
-    Cube(double side) { this.side = side; }
+class Book implements LibraryItem {
+    String title, author;
+    int year;
+    boolean available;
 
-    double calculateVolume() { return side * side * side; }
-    double calculateArea() { return 6 * side * side; }
-    double calculatePerimeter() { return 12 * side; }
+    Book(String title, String author, int year, boolean available) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.available = available;
+    }
+
+    public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+    public int getYear() { return year; }
+    public boolean isAvailable() { return available; }
 }
 
-class Cuboid extends Draw {
-    double l, w, h;
-    Cuboid(double l, double w, double h) { this.l = l; this.w = w; this.h = h; }
-
-    double calculateVolume() { return l * w * h; }
-    double calculateArea() { return 2 * (l*w + w*h + h*l); }
-    double calculatePerimeter() { return 4 * (l + w + h); }
-}
-
-class Cylinder extends Draw {
-    double r, h;
-    Cylinder(double r, double h) { this.r = r; this.h = h; }
-
-    double calculateVolume() { return Math.PI * r * r * h; }
-    double calculateArea() { return 2 * Math.PI * r * (r + h); }
-    double calculatePerimeter() { return 2 * Math.PI * r; }
-}
-
-public class DrawDemo {
+public class LibraryDemo {
     public static void main(String[] args) {
-        Draw cube = new Cube(3);
-        Draw cuboid = new Cuboid(2,3,4);
-        Draw cylinder = new Cylinder(2,5);
-        System.out.println("Cube Volume: " + cube.calculateVolume() + ", Area: " + cube.calculateArea() + ", Perimeter: " + cube.calculatePerimeter());
-        System.out.println("Cuboid Volume: " + cuboid.calculateVolume() + ", Area: " + cuboid.calculateArea() + ", Perimeter: " + cuboid.calculatePerimeter());
-        System.out.println("Cylinder Volume: " + cylinder.calculateVolume() + ", Area: " + cylinder.calculateArea() + ", Perimeter: " + cylinder.calculatePerimeter());
+        Book book = new Book("Java Basics", "John Doe", 2020, true);
+        System.out.println("Title: " + book.getTitle());
+        System.out.println("Author: " + book.getAuthor());
+        System.out.println("Year: " + book.getYear());
+        System.out.println("Available: " + book.isAvailable());
     }
 }
